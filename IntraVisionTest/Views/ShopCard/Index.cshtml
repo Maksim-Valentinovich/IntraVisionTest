@@ -1,0 +1,108 @@
+﻿@using IntraVisionTest.MVC.ViewModels
+@model ShopCardViewModel
+
+<div class="basket-container">
+    <div class="basket-content">
+        <div class="order-info">
+            <h1>Оформление заказа</h1>
+            <div class="order-info-column">
+                <h5>Товар</h5>
+                <h5>Количество</h5>
+                <h5>Цена</h5>
+            </div>
+        </div>
+        <div class="order-basket">
+            <div class="order-list">
+                @foreach (var Product in Model.ShopCard.ListShopItems)
+                {
+                    <div class="list-position">
+                        <div class="coach-img" style="background-image: url(@Product.PhotoLink);  background-position:center; background-size:cover; width:60px; height:100px;"></div>
+                        <div class="pisition-info-modal">@Product.Name<br/></div>
+
+                        <div class="number" data-step="1" data-min="1" data-max=@Product.Count data-value=@Product.Price>
+                            <input class="number-text" type="text" name="count" value="1">
+                            <a href="#" data-id="@Product.Id" class="number-minus">−</a>
+                            <a href="#" data-id="@Product.Id" class="number-plus">+</a>
+                        </div>
+
+                        <div class="pisition-info" data-money="modal" id="@Product.Id">@Product.Price руб<br /></div>
+                        <div><button class="button-position-delete" data-index="@Model.ShopCard.ListShopItems.IndexOf(Product)"><i class="fa-regular fa-trash-can"></i></button></div>
+                    </div>
+                }
+                <div class="list-price" id="deposit" data-deposit=@Model.ShopCard.ListShopItems.Sum(c => c.Price).ToString()>Итого: <span>@Model.ShopCard.ListShopItems.Sum(c => c.Price).ToString() руб.</span></div>
+            </div>
+
+            <div class="buttonts-next">
+                <button  class="button-basket-modal">Вернуться</button>
+                <button class="button-buy">Оплата</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts
+{
+    <script src="~/js/views/shopCard/index.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+            $(".button-basket-modal").click(function () {
+                window.location.href = '/Home/Index';
+            });
+            $(".button-buy").click(function () {
+                var price = $('#deposit').data("deposit");
+                window.location.href = '/Pay/Index?price=' + price;
+            });
+
+            $('body').on('click', '.number-minus, .number-plus', function () {
+                var $row = $(this).closest('.number');
+                var $input = $row.find('.number-text');
+                var step = $row.data('step');
+                var val = parseFloat($input.val());
+                var value = $row.data('value');
+                var deposit = $('#deposit').data("deposit");
+
+                if ($(this).hasClass('number-minus')) {
+                    val -= step;
+                    $('#' + $(this).data("id")).data("money", (val * value));
+                    $('#' + $(this).data("id")).text((val * value) + " руб");
+
+                    deposit = deposit - value;
+                    $('#deposit').data("deposit", deposit);
+                    $('#deposit').text(deposit + " руб");
+                } else {
+                    val += step;
+                    $('#' + $(this).data("id")).data("money", (val * value));
+                    $('#' + $(this).data("id")).text((val * value) + " руб");
+
+                    deposit = deposit + value;
+                    $('#deposit').data("deposit", deposit);
+                    $('#deposit').text(deposit + " руб");
+                }
+                $input.val(val);
+                $input.change();
+                return false;
+            });
+
+            $('body').on('change', '.number-text', function () {
+                var $input = $(this);
+                var $row = $input.closest('.number');
+                var step = $row.data('step');
+                var min = parseInt($row.data('min'));
+                var max = parseInt($row.data('max'));
+                var val = parseFloat($input.val());
+                if (isNaN(val)) {
+                    val = step;
+                } else if (min && val < min) {
+                    val = min;
+                } else if (max && val > max) {
+                    val = max;
+                }
+                $input.val(val);
+            });
+        });
+    </script>
+}

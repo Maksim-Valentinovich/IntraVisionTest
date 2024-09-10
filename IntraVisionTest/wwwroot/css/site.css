@@ -1,0 +1,386 @@
+
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background: #DADADA;
+    background-attachment: fixed;
+    background-size: cover;
+    color: #fff;
+}
+
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 0px;
+    box-shadow: 0.4em 0.4em 20px rgba(122,122,122,0.5);
+}
+
+.home-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
+    padding: 20px;
+    color:black;
+}
+
+/*header*/
+.home-container-header {
+    padding: 0px 0px;
+    display: flex;
+    flex-direction: row;
+}
+
+.header-filter {
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+    justify-content: space-between;
+}
+.header-button {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+}
+
+
+/*Поле предложений*/
+.price-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 50px 15px;
+    width: 100%;
+}
+
+.price-box {
+    margin: 10px 0px;
+    padding: 20px 0px 15px 0px;
+    display: flex;
+    flex-direction: column;
+    color: black;
+    text-align: center;
+    width: 260px;
+    height: 450px;
+    outline: 1px solid darkgray;
+}
+.coach-img {    
+    margin: 0px 0px 20px 0px;
+}
+
+.validity-price {
+    margin: auto auto 10px auto;
+    font-size: 20px;
+    color: #000B89;
+}
+
+.price-button-buy {
+    color: white;
+    width: 150px;
+    height: 45px;
+    margin: auto auto 0px auto;
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 5px;
+    outline: none;
+    background-color: #5C636A;
+}
+
+    .price-button-buy a {
+        color: white;
+        text-decoration: none;
+    }
+
+.button-buy {
+    color: white;
+    width: 150px;
+    height: 45px;
+    margin: auto auto 0px auto;
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 5px;
+    outline: none;
+    background-color: #5C636A;
+}
+.button-basket-modal {
+    color: white;
+    width: 150px;
+    height: 45px;
+    margin: auto auto 0px auto;
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 5px;
+    outline: none;
+    background-color: #5C636A;
+}
+/*Поле предложений*/
+/*Информация о товаре*/
+.order-container {
+    display: flex;
+    flex-direction: column;
+    color: black;
+    padding: 30px 10px;
+    width: 79%;
+}
+
+.order-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+
+
+.button-buy-product {
+    color: white;
+    margin: auto;
+    text-align: center;
+    font-size: 25px;
+    padding: 5px 10px;
+    width: 190px;
+    height: 60px;
+    background: #CD4141;
+    box-shadow: 0.4em 0.4em 20px rgba(122,122,122,0.5);
+    border-radius: 15px;
+}
+
+.finish-pay-button {
+    color: white;
+    width: 150px;
+    height: 45px;
+    margin: auto auto 0px auto;
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 5px;
+    outline: none;
+    background-color: #5C636A;
+}
+
+
+.order-info-price {
+    display: flex;
+    flex-direction: row;
+}
+
+.order-box {
+    font-size: 50px;
+    font-weight: bold;
+    font-family: 'Oxygen', sans-serif;
+    color: #42474D;
+}
+
+
+.price-box i {
+    color: darkgray;
+    margin: 10px 0px;
+    font-size: 60px;
+}
+
+.button-basket-modal {
+    width: max-content;
+    height: 45px;
+    margin: 0px 10px;
+    padding: 0px 10px;
+    text-align: center;
+    border-radius: 10px;
+    background-color: #5C636A;
+}
+
+    .button-basket-modal a {
+        color: white;
+    }
+
+.basket-modal-buttonts {
+    display: flex;
+    flex-direction: row;
+}
+/*Информация о товаре*/
+
+
+/*Корзина*/
+.basket-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+}
+
+.basket-content {
+    width: 79%;
+    color: black;
+    padding: 25px;
+}
+.order-info-column {
+    margin:20px 0px 0px 0px;
+    width:95%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.button-position-delete {
+    all: unset;
+}
+
+
+.order-list {
+    box-shadow: 0.4em 0.4em 15px rgba(122,122,122,0.5);
+    border-radius: 10px;
+    padding: 25px;
+}
+
+.coins-list {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0.4em 0.4em 15px rgba(122,122,122,0.5);
+    border-radius: 10px;
+    padding: 25px;
+}
+
+.list-position {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: black;
+    padding: 15px 0px;
+}
+
+.list-coins {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    color: black;
+    padding: 15px 0px;
+    width: 50%;
+    margin:auto;
+}
+
+.pisition-info-modal {
+    width: 30%;
+}
+
+
+.position-price-modal {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+}
+
+.list-price {
+    text-align: right;
+}
+
+    .list-price span {
+        color: black;
+        margin: 0px 15px;
+        font-size: 35px;
+    }
+
+.buttonts-next {
+    padding: 25px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.finish-container {
+    padding:50px;
+    text-align:center;
+    color: black;
+}
+
+.finish-pay-button {
+    margin:50px 0px 0px 0px;
+}
+
+.stylebutton {
+    margin: auto;
+    width: 60%;
+    border-radius: 3px;
+    background-color: yellow;
+}
+
+
+
+/*кнопки количества*/
+.number {
+    user-select: none;
+    position: relative;
+    text-align: left;
+    padding: 0px;
+    width: 140px;
+    height: min-content;
+    border: 1px solid black;
+    display: inline-block;
+}
+
+.number-minus, .number-plus {
+    position: absolute;
+    top: 0;
+    width: 40px;
+    height: 32px;
+    line-height: 32px;
+    display: block;
+    background: white;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    font-family: arial;
+    color: black;
+    text-decoration: none;
+}
+
+.number-minus {
+    left: 0;
+    border-right: 1px solid black;
+}
+
+.number-plus {
+    right: 0;
+    border-left: 1px solid black;
+}
+
+    .number-minus:hover, .number-plus:hover {
+        background: #fffcfb;
+    }
+
+    .number-minus:active, .number-plus:active {
+        background: #e8e4e2;
+    }
+
+.number-text {
+    display: inline-block;
+    font-size: 14px;
+    color: #000;
+    line-height: 32px;
+    height: 32px;
+    padding: 0;
+    margin: 0 0 0 42px;
+    background: #fff;
+    outline: none;
+    border: none;
+    width: 57px;
+    text-align: center;
+}
+/*кнопки количества*/

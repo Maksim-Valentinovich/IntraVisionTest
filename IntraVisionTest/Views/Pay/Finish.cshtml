@@ -1,0 +1,25 @@
+﻿@model IEnumerable<IntraVisionTest.MVC.ViewModels.CoinViewModel>
+
+<div class="finish-container">
+
+    <div class="head"><h5>Спасибо за покупку!<br/> Пожалуйста, возьмите вашу сдачу: @Model.First().Change руб.</h5></div>
+    <div>
+        <h3>Ваши монеты:</h3>
+        <div class="coins-list">
+            @foreach (var Coin in Model)
+            {
+                <div class="list-coins">
+                    <div class="coach-img" style="background-image: url(@Coin.PhotoLink);  background-position:center; background-size:cover; width:55px; height:55px;"></div>
+                    <div class="pisition-info-modal">@Coin.Count шт.<br /></div>
+                </div>
+            }
+        </div>
+        
+        <button class="finish-pay-button">Каталог товаров</button>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/js/views/pay/finishPay.js"></script>
+}

@@ -1,0 +1,106 @@
+﻿@model IEnumerable<IntraVisionTest.MVC.ViewModels.ProductViewModel>
+
+
+<div class="home-container">
+    <div><h3>Газированные напитки</h3></div>
+    <div class="home-container-header">
+
+        <div class="header-filter">
+            
+            <div class="header-filter-brand">
+                <h5>Выберите бренд</h5>
+                
+                <button class="btn dropdown-toggle btn-lg" type="button" data-bs-toggle="dropdown" aria-expanded="false">Бренд</button>
+                <ul class="dropdown-menu">
+                    @foreach (var product in Model)
+                    {
+                        foreach (var brand in product.BrandNames)
+                        {
+                            <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index" asp-route-brandName="@brand">@brand</a></li>
+                        }
+                        break;
+                    }
+                </ul>
+            </div>
+
+            <div class="header-filter-range">
+                <h5>Стоимость</h5>
+                <label for="customRange1" class="form-label">0 руб</label>
+                <input type="range" class="form-range" id="customRange1">
+            </div>
+        </div>
+
+        <div class="header-button">
+            <button class="price-button-buy" disabled="true"> Импорт </button>
+            <button id="btn" class="price-button-buy" disabled="true">Выбрано</button>
+        </div>
+    </div>
+    <div class="price-container">
+        @foreach (var product in Model)
+        {
+            <div class="price-box">
+                <div class="coach-img" style="background-image: url(@product.PhotoLink);  background-position:center; background-size:cover; width:auto; height:260px;"></div>
+                <div><h5>@product.Name</h5>@product.BrandName </div>
+                <div class="validity-price">@product.Price руб</div>
+                <button type="submit" class="stylebutton" data-ids="@product.Id"> Выбрать </button>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+
+        $(".stylebutton").click(function () {
+            let productId = $(this).data("ids");
+            $.ajax({
+                url: '/ShopCard/AddToCard?productId=' + productId,
+                type: 'GET',
+                dataType: 'html',
+                success: function (content) {
+                    $('#basket-modal div.modal-body').html(content);
+                    $('#basket-modal').modal('show');
+                },
+                error: function (e) { }
+            })
+        })
+
+        $(".price-button-buy").click(function () {
+            $.ajax({
+                url: '/ShopCard/Index',
+                type: 'GET',
+                dataType: 'html',
+                success: function (content) {
+                    window.location.href = '/ShopCard/Index';
+                },
+                error: function (e) { }
+            })
+        })
+
+        let count = 0;
+        document.querySelectorAll('.stylebutton').forEach(function (e) {
+            e.addEventListener('click', function () {
+
+                // if ($(this).text.value === 'Выбрано') {
+
+                //     $(this).text('Выбрать');
+                //     this.style.backgroundColor = "yellow";
+                // }
+                // else
+                // {
+                //     $(this).text('Выбрано');
+                //     this.style.backgroundColor = "green";
+                // }
+
+                this.style.backgroundColor = "green";
+                $(this).text('Выбрано');
+                count += 1;
+                document.getElementById("btn").innerHTML = "Выбрано: " + count;
+                document.getElementById("btn").disabled = false;
+            })
+        });
+    </script>
+
+}
+

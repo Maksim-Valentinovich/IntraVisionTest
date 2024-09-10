@@ -1,0 +1,106 @@
+﻿@model IEnumerable<IntraVisionTest.MVC.ViewModels.CoinViewModel>
+
+<div class="basket-container">
+    <div class="basket-content">
+
+        <div class="order-info">
+            <h1>Оплата</h1>
+            <div class="order-info-column">
+                <h5>Номинал</h5>
+                <h5>Количество</h5>
+                <h5>Сумма</h5>
+            </div>
+        </div>
+        <div class="order-basket">
+            <div class="order-list">
+                @foreach (var Coin in Model)
+                {
+                    <div class="list-position">
+                        <div class="coach-img" style="background-image: url(@Coin.PhotoLink);  background-position:center; background-size:contain; width:55px; height:55px;"></div>
+                        <div class="pisition-info-modal">@Coin.Value<br/></div>
+
+                        <div class="number" data-step=1 data-min="0" data-max="1000" data-value=@Coin.Value>
+                            <input class="number-text" type="text" name="count" value="0">
+                            <a href="#" data-id="@Coin.Id" class="number-minus">−</a>
+                            <a href="#" data-id="@Coin.Id" class="number-plus">+</a>
+                        </div>
+
+                        <div class="pisition-info" data-money="modal" id="@Coin.Id">0 руб<br/></div>
+                    </div>
+                }
+                <div class="list-price" data-price=@Model.First().Price>Итоговая сумма: <span> @Model.First().Price руб.</span></div>
+                <div class="list-price" id="deposit" data-deposit="0">Вы внесли: <span>0 руб.</span></div>
+            </div>
+
+            <div class="buttonts-next">
+                <div class="button-basket-modal"><a class="btn" asp-controller="Home" asp-action="Index">Вернуться</a> </div>
+                <button id="btn" class="price-button-buy" data-deposit="0" disabled="true">Оплата</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts
+{
+    <script src="~/js/views/shopCard/index.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('body').on('click', '.number-minus, .number-plus', function () {
+                var $row = $(this).closest('.number');
+                var $input = $row.find('.number-text');
+                var step = $row.data('step');
+                var val = parseFloat($input.val());
+                var value = $row.data('value');
+                var deposit = $('#deposit').data("deposit");
+                var price = $('.list-price').data("price");
+
+                if ($(this).hasClass('number-minus')) {
+                    val -= step;
+                    $('#' + $(this).data("id")).data("money", (val * value));
+                    $('#' + $(this).data("id")).text((val * value) + " руб");
+
+                    deposit = deposit - value;
+                    $('#deposit').data("deposit", deposit);
+                    $('#deposit').text(deposit + " руб");
+
+                    if (deposit < price) {
+                        document.getElementById("btn").disabled = true;
+                    }
+                } else {
+                    val += step;
+                    $('#' + $(this).data("id")).data("money", (val*value));
+                    $('#' + $(this).data("id")).text((val * value) + " руб");
+
+                    deposit = deposit + value;
+                    $('#deposit').data("deposit", deposit);
+                    $('#deposit').text(deposit + " руб");
+
+                    if (deposit >= price) {
+                        document.getElementById("btn").disabled = false;
+                    }
+                }
+                $input.val(val);
+                $input.change();
+                return false;
+            });
+
+            $('body').on('change', '.number-text', function () {
+                var $input = $(this);
+                var $row = $input.closest('.number');
+                var step = $row.data('step');
+                var min = parseInt($row.data('min'));
+                var max = parseInt($row.data('max'));
+                var val = parseFloat($input.val());
+                if (isNaN(val)) {
+                    val = step;
+                } else if (min && val < min) {
+                    val = min;
+                } else if (max && val > max) {
+                    val = max;
+                }
+                $input.val(val);
+            });
+        });
+    </script>
+}
